@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% load tags %}
+
 {% block body_block %}
 
 
@@ -24,8 +26,7 @@
         Your choosen features are here:
 
         {% for choice in choices %}
-
-          <span class="badge badge-primary">{{ choice }}</span>
+          <span class="badge badge-{{ choice|BoxColor }}">{{ choice }}</span>
 
         {% endfor %}
 
@@ -33,11 +34,17 @@
 
       <p>Your results are here:</p>
 
-      {% for result in results %}
+      {% for key, value in results.items %}
 
-      <div class="border border-primary" style="margin-bottom: 50px !important;">
+      <div class="feature-name">
 
-        <p>{{ result }}</p>
+        Feature Name: <span class="badge badge-{{ key|BoxColor }}">{{ key }}</span>
+
+      </div>
+
+      <div class="border border-{{ 'none'|BoxColor }} result-box">
+
+        <p>{{ value }}</p>
 
       </div>
 

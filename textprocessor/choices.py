@@ -1,5 +1,8 @@
 OPTIONS = (
         ('Tags', "Tags"),
         ('Nouns', "Nouns"),
-        ('Verbs', "Verbs"),
+        ('Words', "Words"),
+        ('Sentences', "Sentences"),
 )
+
+box_options = ['primary', 'success', 'warning', 'danger']
