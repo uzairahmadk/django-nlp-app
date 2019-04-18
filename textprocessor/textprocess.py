@@ -61,6 +61,7 @@ class TextProcess:
             ##detect abreviation
             last_value = self.result_counter.tag_abreviation_checker(self.text_cleaner.space_remover(last_value))
 
+            ##concatanage strings
             data = first_value + ' ' + last_value
 
             self.return_result.append(data)

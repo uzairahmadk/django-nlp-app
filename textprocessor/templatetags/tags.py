@@ -10,3 +10,20 @@ def BoxColor(choice_name):
     options = box_options
     shuffle(options)
     return options[0]
+
+@register.filter(name='TagSplitter')
+def TagSplitter(tag_data, index_number):
+    #split the tag data and return the desired index value
+    tag_data = tag_data.split(' ')[index_number]
+    return tag_data
+
+@register.filter(name='TotalNumber')
+def TotalNumber(result_dict, key_value):
+    #counting the total number of items based on key
+    counter = 0
+    for key, value in result_dict.items():
+        if key == key_value:
+            for sub_value in value:
+                counter = counter + 1
+
+    return counter
