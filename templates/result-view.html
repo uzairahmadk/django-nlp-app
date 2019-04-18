@@ -44,7 +44,17 @@
 
       <div class="border border-{{ 'none'|BoxColor }} result-box">
 
-        <p>{{ value }}</p>
+        {% if key == 'Tags' %}
+
+          {% for sub_value in value %}
+
+            <p>{{ sub_value }}</p>
+
+          {% endfor %}
+
+        {% endif %}
+
+
 
       </div>
 
