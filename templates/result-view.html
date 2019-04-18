@@ -10,9 +10,45 @@
   <div class="starter-template">
     <h1>BYLC NLP TEST FORM</h1>
 
-    <p>Your results are here:</p>
 
-    <p>{{ result }}</p>
+
+    {% if error %}
+
+      <div class="alert alert-danger" role="alert">
+        There is an error in your input. Please try again.
+      </div>
+
+    {% else %}
+
+      <p>
+        Your choosen features are here:
+
+        {% for choice in choices %}
+
+          <span class="badge badge-primary">{{ choice }}</span>
+
+        {% endfor %}
+
+      </p>
+
+      <p>Your results are here:</p>
+
+      {% for result in results %}
+
+      <div class="border border-primary" style="margin-bottom: 50px !important;">
+
+        <p>{{ result }}</p>
+
+      </div>
+
+      {% endfor %}
+
+
+    {% endif %}
+
+
+
+
 
   </div>
 
