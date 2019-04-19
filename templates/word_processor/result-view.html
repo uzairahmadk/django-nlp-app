@@ -38,7 +38,6 @@
 
         <span><strong>Total Unique Words Found:</strong></span> <span class="badge badge-{{ 'Word'|BoxColor }}">{{ results|DictCounter }}</span>
 
-        {{ results }}
       </div>
 
         <table class="table table-hover table-dark">
@@ -47,9 +46,9 @@
               <th scope="col">#</th>
               <th scope="col">Word</th>
               <th scope="col">Weight</th>
-              <th scope="col">Defination</th>
-              <th scope="col">Spelling Check</th>
               <th scope="col">Language</th>
+              <th scope="col">Correct Spell</th>
+              <th scope="col">Defination</th>
             </tr>
           </thead>
           <tbody>
@@ -60,12 +59,11 @@
                   <td>{{ forloop.counter }}</td>
                   <td>{{ key }}</td>
                   <td>{{ values|ListElementReturn:0 }}</td>
-                  <td>No Def</td>
-                  <td>No Check</td>
                   <td>{{ values|ListElementReturn:1 }}</td>
-            
+                  <td>{{ values|ListElementReturn:2 }}</td>
+                  <td>{{ values|ListElementReturn:3 }}</td>
 
-              </tr>
+                </tr>
 
             {% endfor %}
 

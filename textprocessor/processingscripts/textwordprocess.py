@@ -10,6 +10,38 @@ class TextWordProcess:
     text_cleaner = ResultCleaner()
     return_result = defaultdict(list)
 
+    def word_definitions(self):
+        for key, value in self.return_result.items():
+
+            if isinstance(key, str) and len(key) >= 3:
+                #if word is only an English word
+                if value[1] == 'en':
+                    word = Word(key)
+                    defination = word.definitions
+                    if defination:
+                        #take the first value from the list
+                        defination = defination[0]
+                        #check if semicolon is present in the string
+                        if ';' in defination:
+                            defination = self.text_cleaner.semicolon_splitter(defination, 0)
+                        self.return_result[key].append(defination)
+                    else:
+                        self.return_result[key].append('Not Found')
+                else:
+                    self.return_result[key].append('Not an English word')
+            else:
+                self.return_result[key].append('Not a string')
+
+        return self.return_result
+
+    def correct_spelling(self):
+        for key, value in self.return_result.items():
+            word = Word(key)
+            correct = word.correct()
+            self.return_result[key].append(correct)
+
+        return self.return_result
+
     def detect_language(self):
         for key, value in self.return_result.items():
 
@@ -55,6 +87,12 @@ class TextWordProcess:
 
         #detect text language
         self.return_result = self.detect_language()
+
+        #check correct spelling
+        self.return_result = self.correct_spelling()
+
+        #find word defination
+        self.return_result = self.word_definitions()
 
         #normalize the defaultdict
         for key, values in self.return_result.items():

@@ -17,3 +17,6 @@ class ResultCleaner:
 
     def lower_case(self, string):
         return string.lower()
+
+    def semicolon_splitter(self, text, index_value):
+        return text.split(';')[index_value]
