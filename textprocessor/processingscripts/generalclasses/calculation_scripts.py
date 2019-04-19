@@ -56,3 +56,11 @@ class MathemeticsCalculation:
             return_result.append(neutral_percentage)
 
         return return_result
+
+    def dict_items_summation(self, dict):
+        total = 0
+
+        for key, value in dict.items():
+            total = total + value
+
+        return total

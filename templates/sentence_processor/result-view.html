@@ -36,11 +36,45 @@
 
         <span><strong>Table Name:</strong></span> <span class="badge badge-{{ 'Word'|BoxColor }}">Sentences</span>
 
-        {{ results }}
+        <span><strong>Total Unique Sentences Found:</strong></span> <span class="badge badge-{{ 'Sentence'|BoxColor }}">{{ results|DictCounter }}</span>
 
       </div>
 
-        
+      <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sentence</th>
+            <th scope="col">Sentimental Score</th>
+            <th scope="col">Percentage of Polarity</th>
+            <th scope="col">Maximum Polarity</th>
+            <th scope="col">Percentage of Subjectivity</th>
+            <th scope="col">Overall Mass</th>
+            <th scope="col">Total Words</th>
+            <th scope="col">Most Common Word</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for key, values in results.items %}
+
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ key }}</td>
+                <td>{{ values|ListElementReturn:0 }}</td>
+                <td>{{ values|ListElementReturn:1 }}</td>
+                <td>{{ values|ListElementReturn:2 }}</td>
+                <td>{{ values|ListElementReturn:3 }}</td>
+                <td>{{ values|ListElementReturn:4 }}</td>
+                <td>{{ values|ListElementReturn:5 }}</td>
+                <td>{{ values|ListElementReturn:6 }}</td>
+              </tr>
+
+          {% endfor %}
+
+`
+        </tbody>
+      </table>
 
 
     {% endif %}

@@ -1,5 +1,6 @@
 from textblob import TextBlob
 from textblob.blob import Sentence
+from collections import defaultdict
 from textprocessor.processingscripts.generalclasses.calculation_scripts import MathemeticsCalculation
 
 class GeneralTextProcessing:
@@ -61,3 +62,12 @@ class GeneralTextProcessing:
             return 'Subjective'
         else:
             return 'Neutral'
+
+    def word_counter(self, text):
+        normal_dict = {}
+        total = 0
+
+        for key, values in text.items():
+            normal_dict[key] = values
+
+        return self.math_class.dict_items_summation(normal_dict)
