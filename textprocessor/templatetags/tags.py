@@ -28,3 +28,27 @@ def TagSplitter(tag_data, index_number):
 def ListCounter(counting_list):
     #return total number of items of the list
     return len(counting_list)
+
+@register.filter(name='DictCounter')
+def DictCounter(counting_dict):
+    #return total number of items of the dictionary
+    counter = 0
+
+    for key, value in counting_dict:
+        counter = counter + 1
+
+    return counter
+
+@register.filter(name='ListDictCounter')
+def ListDictCounter(counting_list_dict):
+    #return total number of items of the dictionary inside a list
+    counter = 0
+
+    #unpacking the list
+    for list_item in counting_list_dict:
+
+        #unpacking the inner dictionary
+        for key, value in list_item.items():
+            counter = counter + 1
+
+    return counter

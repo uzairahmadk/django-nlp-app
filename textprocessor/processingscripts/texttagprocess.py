@@ -24,15 +24,24 @@ class TextTagProcess:
     result_dict = {}
 
     def organizing_results(self, key_data):
-        temp_value_list = []
-        index_counter = 0
 
+        #assigning a temporary list for each tag
+        temp_value_list = []
+
+        #check tag key one by one
         for key in key_data:
+
+            #assigning an empty list to the dictionary
             self.result_dict[key] = []
+
+            #iterating through all the values founded
             for value in self.return_result:
+
+                #if a value matched then appending to the temp list
                 if key in value:
                     temp_value_list.append(value)
 
+            #finally inserting the whole list to the particular key of the dict
             self.result_dict[key] = temp_value_list
             temp_value_list = []
 
@@ -65,11 +74,8 @@ class TextTagProcess:
             ##detect abreviation
             last_value = self.result_counter.tag_abreviation_checker(last_value)
 
-            #self.result_dict[last_value] = first_value
-
+            #creating a list of Tag as keys
             key_data.append(last_value)
-
-            #value_data.append(first_value)
 
             ##concatanage strings
             data = first_value + ' ' + last_value
@@ -77,9 +83,5 @@ class TextTagProcess:
             self.return_result.append(data)
 
         final_dict = self.organizing_results(key_data)
-
-        #return self.return_result
-
-        #return self.result_dict
 
         return final_dict
