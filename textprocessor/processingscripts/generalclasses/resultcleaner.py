@@ -20,3 +20,6 @@ class ResultCleaner:
 
     def semicolon_splitter(self, text, index_value):
         return text.split(';')[index_value]
+
+    def tuple_extractor(self, rcv_tuple, index_number):
+        return rcv_tuple[index_number]

@@ -5,6 +5,7 @@ from textprocessor.forms import TextProcessingForm
 from textprocessor.processingscripts.texttagprocess import TextTagProcess
 from textprocessor.processingscripts.textnounprocess import TextNounProcess
 from textprocessor.processingscripts.textwordprocess import TextWordProcess
+from textprocessor.processingscripts.textsentenceprocess import TextSentenceProcess
 
 # Create your views here.
 class TagProcessorView(View):
@@ -86,3 +87,29 @@ class WordProcessorView(View):
         else:
             self.form_error = True
             return render(request, 'word_processor/result-view.html', {'error': self.form_error})
+
+
+# Create your views here.
+class SentenceProcessorView(View):
+    template_name = 'sentence_processor/textform-view.html'
+    form_class = TextProcessingForm
+    context_object_name = 'text_form'
+    initial = {'key': 'value'}
+    processor_class = TextSentenceProcess()
+    form_error = False
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'form': self.form_class})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            results = self.processor_class.text_sentence(text)
+
+            return render(request, 'sentence_processor/result-view.html', {'results': results, 'error': self.form_error})
+
+        else:
+            self.form_error = True
+            return render(request, 'sentence_processor/result-view.html', {'error': self.form_error})

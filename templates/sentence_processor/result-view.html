@@ -1,0 +1,56 @@
+{% extends "base-view.html" %}
+
+{% load staticfiles %}
+
+{% load tags %}
+
+{% block body_block %}
+
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1>BYLC NLP SENTENCE RESULT</h1>
+
+
+
+    {% if error %}
+
+      <div class="alert alert-danger" role="alert">
+        There is an error in your input. Please try again.
+      </div>
+
+    {% else %}
+
+      <p>
+        Your choosen features are here:
+
+
+          <span class="badge badge-{{ choice|BoxColor }}">Sentences</span>
+
+      </p>
+
+      <p>Your results are here:</p>
+
+      <div class="feature-name">
+
+        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ 'Word'|BoxColor }}">Sentences</span>
+
+        {{ results }}
+
+      </div>
+
+        
+
+
+    {% endif %}
+
+
+
+
+
+  </div>
+
+</main><!-- /.container -->
+
+{% endblock %}
