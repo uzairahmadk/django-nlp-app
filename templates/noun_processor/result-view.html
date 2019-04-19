@@ -10,7 +10,7 @@
 <main role="main" class="container">
 
   <div class="starter-template">
-    <h1>BYLC NLP TEST FORM</h1>
+    <h1>BYLC NLP NOUN RESULT</h1>
 
 
 
@@ -25,52 +25,43 @@
       <p>
         Your choosen features are here:
 
-        {% for choice in choices %}
-          <span class="badge badge-{{ choice|BoxColor }}">{{ choice }}</span>
 
-        {% endfor %}
+          <span class="badge badge-{{ choice|BoxColor }}">Nouns</span>
 
       </p>
 
       <p>Your results are here:</p>
 
-      {% for key, value in results.items %}
-
       <div class="feature-name">
 
-        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ key|BoxColor }}">{{ key }}</span>
+        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ 'Noun'|BoxColor }}">Noun</span>
 
-        <span><strong> Total Number of Nouns Found:</strong></span> <span class="badge badge-{{ key|BoxColor }}">{{ results|TotalNumber:key }}</span>
-
+        <span><strong>Total Nouns Found:</strong></span> <span class="badge badge-{{ 'Noun'|BoxColor }}">{{ results|DictCounter }}</span>
       </div>
 
         <table class="table table-hover table-dark">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Tag Details</th>
-              <th scope="col">Tag Name</th>
-              <th scope="col">Total</th>
+              <th scope="col">Noun</th>
+              <th scope="col">Weight</th>
             </tr>
           </thead>
           <tbody>
 
-          {% for sub_value in value %}
+            {% for key, value in results.items %}
 
-              <!--<tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ sub_value|TagSplitter:1 }}</td>
-                <td>{{ sub_value|TagSplitter:0 }}</td>
-              </tr>-->
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
+                </tr>
 
-              {{ sub_value }}
+            {% endfor %}
 
-          {% endfor %}
 
           </tbody>
         </table>
-
-      {% endfor %}
 
 
     {% endif %}

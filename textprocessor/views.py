@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
+from django.views.decorators.cache import never_cache
 from textprocessor.forms import TextProcessingForm
 from textprocessor.processingscripts.texttagprocess import TextTagProcess
 from textprocessor.processingscripts.textnounprocess import TextNounProcess
@@ -45,19 +46,16 @@ class NounProcessorView(View):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {'form': self.form_class})
 
+    @never_cache
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        results = {}
-        choices = []
+        #results = []
 
         if form.is_valid():
             text = form.cleaned_data['text']
+            results = self.processor_class.text_noun(text)
 
-            choices.append('Nouns')
-            results['Nouns'] = self.processor_class.text_noun(text)
-
-
-            return render(request, 'noun_processor/result-view.html', {'results': results, 'choices': choices, 'error': self.form_error})
+            return render(request, 'noun_processor/result-view.html', {'results': results, 'error': self.form_error})
 
         else:
             self.form_error = True

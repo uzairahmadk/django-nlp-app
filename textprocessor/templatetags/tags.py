@@ -34,7 +34,7 @@ def DictCounter(counting_dict):
     #return total number of items of the dictionary
     counter = 0
 
-    for key, value in counting_dict:
+    for key, value in counting_dict.items():
         counter = counter + 1
 
     return counter
