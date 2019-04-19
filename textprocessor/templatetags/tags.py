@@ -52,3 +52,7 @@ def ListDictCounter(counting_list_dict):
             counter = counter + 1
 
     return counter
+
+@register.filter(name='ListElementReturn')
+def ListElementReturn(list, index_number):
+    return list[index_number]
