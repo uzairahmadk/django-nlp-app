@@ -28,9 +28,30 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'tag-processor-page' %}">Tag Processing <span class="sr-only">(current)</span></a>
+
+          {% url 'tag-processor-page' as url_check %}
+          {% if request.path == url_check %}
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'tag-processor-page' %}">Tag Processing<span class="sr-only">(current)</span> </a>
+          {% else %}
+              <li>
+                  <a class="nav-link" href="{% url 'tag-processor-page' %}">Tag Processing</a>
+          {% endif %}
+
+
           </li>
+
+          {% url 'noun-processor-page' as url_check %}
+          {% if request.path == url_check %}
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'noun-processor-page' %}">Noun Processing<span class="sr-only">(current)</span></a>
+          {% else %}
+              <li>
+                  <a class="nav-link" href="{% url 'noun-processor-page' %}">Noun Processing</a>
+          {% endif %}
+
+          </li>
+
         </ul>
       </div>
     </nav>
@@ -47,7 +68,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}../../../../../code.jquery.com/" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>-->
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>

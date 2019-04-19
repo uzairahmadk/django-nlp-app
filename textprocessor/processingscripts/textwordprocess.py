@@ -5,7 +5,6 @@ from textprocessor.choices import *
 
 class TextWordProcess:
 
-    result_counter = ResultCounter()
     text_cleaner = ResultCleaner()
     return_result = []
 

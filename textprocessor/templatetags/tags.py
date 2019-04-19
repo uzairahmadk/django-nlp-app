@@ -4,6 +4,13 @@ from textprocessor.choices import *
 
 register = template.Library()
 
+@register.filter
+def AppURLChecker(page_url, finder_url):
+    if finder_url in page_url:
+        return True
+    else:
+        return False
+
 @register.filter(name='BoxColor')
 def BoxColor(choice_name):
     #Scrambled and randomly send one value from the list

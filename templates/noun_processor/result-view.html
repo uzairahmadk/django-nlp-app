@@ -57,11 +57,13 @@
 
           {% for sub_value in value %}
 
-              <tr>
+              <!--<tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ sub_value|TagSplitter:1 }}</td>
                 <td>{{ sub_value|TagSplitter:0 }}</td>
-              </tr>
+              </tr>-->
+
+              {{ sub_value }}
 
           {% endfor %}
 
