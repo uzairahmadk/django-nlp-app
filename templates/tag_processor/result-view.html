@@ -25,22 +25,19 @@
       <p>
         Your choosen features are here:
 
-        {% for choice in choices %}
-          <span class="badge badge-{{ choice|BoxColor }}">{{ choice }}</span>
-
-        {% endfor %}
+          <span class="badge badge-{{ choice|BoxColor }}">Tags</span>
 
       </p>
 
       <p>Your results are here:</p>
 
-      {% for key, value in results.items %}
+
 
       <div class="feature-name">
 
-        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ key|BoxColor }}">{{ key }}</span>
+        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ 'Tags'|BoxColor }}">Tags</span>
 
-        <span><strong> Total Number of Nouns Found:</strong></span> <span class="badge badge-{{ key|BoxColor }}">{{ results|TotalNumber:key }}</span>
+        <span><strong>Total Tag Found:</strong></span> <span class="badge badge-{{ 'Tags'|BoxColor }}">{{ results|ListCounter }}</span>
 
       </div>
 
@@ -55,20 +52,37 @@
           </thead>
           <tbody>
 
-          {% for sub_value in value %}
 
-              <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ sub_value|TagSplitter:1 }}</td>
-                <td>{{ sub_value|TagSplitter:0 }}</td>
-              </tr>
+
+        {% for result in results %}
+
+          {% for key, value in result.items %}
+
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ key }}</td>
+              <td>
+              {% for sub_value in value %}
+
+                {{ sub_value|TagSplitter:0 }}
+
+              {% endfor %}
+            </td>
+
+            <td>{{ value|ListCounter }}</td>
+
+            </tr>
+
+          {% endfor %}
+
+
 
           {% endfor %}
 
           </tbody>
         </table>
 
-      {% endfor %}
+
 
 
     {% endif %}

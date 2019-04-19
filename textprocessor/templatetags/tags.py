@@ -24,13 +24,7 @@ def TagSplitter(tag_data, index_number):
     tag_data = tag_data.split(' ')[index_number]
     return tag_data
 
-@register.filter(name='TotalNumber')
-def TotalNumber(result_dict, key_value):
-    #counting the total number of items based on key
-    counter = 0
-    for key, value in result_dict.items():
-        if key == key_value:
-            for sub_value in value:
-                counter = counter + 1
-
-    return counter
+@register.filter(name='ListCounter')
+def ListCounter(counting_list):
+    #return total number of items of the list
+    return len(counting_list)

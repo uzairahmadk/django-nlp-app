@@ -21,8 +21,26 @@ class TextTagProcess:
     result_counter = ResultCounter()
     text_cleaner = ResultCleaner()
     return_result = []
+    result_dict = {}
+
+    def organizing_results(self, key_data):
+        temp_value_list = []
+        index_counter = 0
+
+        for key in key_data:
+            self.result_dict[key] = []
+            for value in self.return_result:
+                if key in value:
+                    temp_value_list.append(value)
+
+            self.result_dict[key] = temp_value_list
+            temp_value_list = []
+
+        return self.result_dict
 
     def text_tag(self, text):
+        key_data = []
+        value_data = []
         blob = TextBlob(text)
         blob = blob.tags
 
@@ -41,12 +59,27 @@ class TextTagProcess:
             first_value = self.text_cleaner.tag_comma_splitter(str(data), 0)
             last_value = self.text_cleaner.tag_comma_splitter(str(data), 1)
 
+            #remove space from the last value
+            last_value = self.text_cleaner.space_remover(last_value)
+
             ##detect abreviation
-            last_value = self.result_counter.tag_abreviation_checker(self.text_cleaner.space_remover(last_value))
+            last_value = self.result_counter.tag_abreviation_checker(last_value)
+
+            #self.result_dict[last_value] = first_value
+
+            key_data.append(last_value)
+
+            #value_data.append(first_value)
 
             ##concatanage strings
             data = first_value + ' ' + last_value
 
             self.return_result.append(data)
 
-        return self.return_result
+        final_dict = self.organizing_results(key_data)
+
+        #return self.return_result
+
+        #return self.result_dict
+
+        return final_dict
