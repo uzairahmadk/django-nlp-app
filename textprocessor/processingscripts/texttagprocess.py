@@ -1,4 +1,5 @@
 from textblob import TextBlob
+from textprocessor.processingscripts.generalclasses.resultcleaner import ResultCleaner
 from textprocessor.choices import *
 
 
@@ -15,25 +16,7 @@ class ResultCounter:
         return detail_data
 
 
-class ResultCleaner:
-
-    def first_bracket_first_parenthesis_remover(self, text):
-        return text.replace("(", "")
-
-    def first_bracket_second_parenthesis_remover(self, text):
-        return text.replace(")", "")
-
-    def single_quote_remover(self, text):
-        return text.replace("'", "")
-
-    def space_remover(self, text):
-        return text.replace(" ", "")
-
-    def tag_comma_splitter(self, text, index_value):
-        return text.split(',')[index_value]
-
-
-class TextProcess:
+class TextTagProcess:
 
     result_counter = ResultCounter()
     text_cleaner = ResultCleaner()
@@ -67,15 +50,3 @@ class TextProcess:
             self.return_result.append(data)
 
         return self.return_result
-
-    def text_noun(text):
-        blob = TextBlob(text)
-        return blob.noun_phrases
-
-    def text_word(text):
-        blob = TextBlob(text)
-        return blob.words
-
-    def text_sentence(text):
-        blob = TextBlob(text)
-        return blob.sentences

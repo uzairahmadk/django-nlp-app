@@ -38,13 +38,11 @@
 
       <div class="feature-name">
 
-        Table Name: <span class="badge badge-{{ key|BoxColor }}">{{ key }}</span>
+        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ key|BoxColor }}">{{ key }}</span>
 
-        &nbsp; Total Number of Tags Found: <span class="badge badge-{{ key|BoxColor }}">{{ results|TotalNumber:key }}</span>
+        <span><strong> Total Number of Tags Found:</strong></span> <span class="badge badge-{{ key|BoxColor }}">{{ results|TotalNumber:key }}</span>
 
       </div>
-
-        {% if key == 'Tags' %}
 
         <table class="table table-hover table-dark">
           <thead>
@@ -69,8 +67,6 @@
 
           </tbody>
         </table>
-
-        {% endif %}
 
       {% endfor %}
 

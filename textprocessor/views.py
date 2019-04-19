@@ -1,15 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import View
 from textprocessor.forms import TextProcessingForm
-from textprocessor.textprocess import TextProcess
+from textprocessor.processingscripts.texttagprocess import TextTagProcess
 
 # Create your views here.
-class HomePageView(View):
-    template_name = 'textform-view.html'
+class TagProcessorView(View):
+    template_name = 'tag_processor/textform-view.html'
     form_class = TextProcessingForm
     context_object_name = 'text_form'
     initial = {'key': 'value'}
-    processor_class = TextProcess()
+    processor_class = TextTagProcess()
     form_error = False
 
     def get(self, request, *args, **kwargs):
@@ -22,27 +22,13 @@ class HomePageView(View):
 
         if form.is_valid():
             text = form.cleaned_data['text']
-            feature_choice = form.cleaned_data['feature_choice']
 
-            for feature in feature_choice:
-
-                ##Text tags processing
-                if feature == 'Tags':
-                    choices.append('Tags')
-                    results['Tags'] = self.processor_class.text_tag(text)
-                elif feature == 'Nouns':
-                    choices.append('Nouns')
-                    results['Nouns'] = self.processor_class.text_noun(text)
-                elif feature == 'Words':
-                    choices.append('Words')
-                    results['Words'] = self.processor_class.text_word(text)
-                else:
-                    choices.append('Sentences')
-                    results['Sentences'] = self.processor_class.text_sentence(text)
+            choices.append('Tags')
+            results['Tags'] = self.processor_class.text_tag(text)
 
 
-            return render(request, 'result-view.html', {'results': results, 'choices': choices, 'error': self.form_error})
+            return render(request, 'tag_processor/result-view.html', {'results': results, 'choices': choices, 'error': self.form_error})
 
         else:
             self.form_error = True
-            return render(request, 'result-view.html', {'error': self.form_error})
+            return render(request, 'tag_processor/result-view.html', {'error': self.form_error})
