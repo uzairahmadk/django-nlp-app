@@ -52,6 +52,33 @@
 
           </li>
 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Word Processing
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Word Counting</a>
+              <a class="dropdown-item" href="#">Word Defination</a>
+              <a class="dropdown-item" href="#">Spelling Check</a>
+              <a class="dropdown-item" href="#">Word Entropy</a>
+              <a class="dropdown-item" href="#">N-Grams</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sentence Processing
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Sentence Counting</a>
+              <a class="dropdown-item" href="#">Sentimental Analysis Per Sentence</a>
+            </div>
+          </li>
+
+          <li>
+              <a class="nav-link" href="#">Sentimental Analysis</a>
+          </li>
+
         </ul>
       </div>
     </nav>
@@ -62,12 +89,16 @@
 
     {% endblock %}
 
-
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Developed by Pritom Borogoria</span>
+      </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}../../../../../code.jquery.com/" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
