@@ -1,0 +1,82 @@
+{% extends "base-view.html" %}
+
+{% load staticfiles %}
+
+{% load tags %}
+
+{% block body_block %}
+
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1>BYLC NLP WORD RESULT</h1>
+
+
+
+    {% if error %}
+
+      <div class="alert alert-danger" role="alert">
+        There is an error in your input. Please try again.
+      </div>
+
+    {% else %}
+
+      <p>
+        Your choosen features are here:
+
+
+          <span class="badge badge-{{ choice|BoxColor }}">Words</span>
+
+      </p>
+
+      <p>Your results are here:</p>
+
+      <div class="feature-name">
+
+        <span><strong>Table Name:</strong></span> <span class="badge badge-{{ 'Word'|BoxColor }}">Word</span>
+
+        <span><strong>Total Unique Words Found:</strong></span> <span class="badge badge-{{ 'Word'|BoxColor }}">{{ results|DictCounter }}</span>
+
+
+      </div>
+
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Word</th>
+              <th scope="col">Weight</th>
+              <th scope="col">Defination</th>
+              <th scope="col">Spelling Check</th>
+              <th scope="col">Language</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for key, value in results.items %}
+
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
+                </tr>
+
+            {% endfor %}
+
+`
+          </tbody>
+        </table>
+
+
+    {% endif %}
+
+
+
+
+
+  </div>
+
+</main><!-- /.container -->
+
+{% endblock %}
