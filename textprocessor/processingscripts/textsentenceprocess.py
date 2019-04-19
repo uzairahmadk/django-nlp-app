@@ -24,6 +24,18 @@ class TextSentenceProcess:
             npn_percentage = self.general_processor.npn_percentage_statement(sentiment.sentiment.polarity)
             self.return_result[key].append(npn_percentage)
 
+            #analyze overall polarity of the sentence
+            npn_overall = self.general_processor.npn_overall_statement(sentiment.sentiment.polarity)
+            self.return_result[key].append(npn_overall)
+
+            #analyze the percentage of Subjectivity and objectivity of the sentence
+            so_percentage = self.general_processor.so_percentage_statement(sentiment.sentiment[1])
+            self.return_result[key].append(so_percentage)
+
+            #analyze overall subjectivity of the sentence
+            so_overall = self.general_processor.so_overall_statement(sentiment.sentiment[1])
+            self.return_result[key].append(so_overall)
+
             #self.return_result[key].append(str(sentiment.sentiment.polarity))
         return self.return_result
 
