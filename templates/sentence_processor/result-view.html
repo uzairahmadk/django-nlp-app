@@ -38,6 +38,11 @@
 
         <span><strong>Total Unique Sentences Found:</strong></span> <span class="badge badge-{{ 'Sentence'|BoxColor }}">{{ results|DictCounter }}</span>
 
+        <span><strong>Total Text Sentiment:</strong></span> <span class="badge badge-{{ 'Sentence'|BoxColor }}">{{ total_vibe|ListElementReturn:0 }}</span>
+
+        <span><strong>Total Text Mass:</strong></span> <span class="badge badge-{{ 'Sentence'|BoxColor }}">{{ total_vibe|ListElementReturn:1 }}</span>
+
+
       </div>
 
       <table class="table table-hover table-dark">

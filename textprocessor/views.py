@@ -6,6 +6,7 @@ from textprocessor.processingscripts.texttagprocess import TextTagProcess
 from textprocessor.processingscripts.textnounprocess import TextNounProcess
 from textprocessor.processingscripts.textwordprocess import TextWordProcess
 from textprocessor.processingscripts.textsentenceprocess import TextSentenceProcess
+from textprocessor.processingscripts.generalclasses.general_text_processing import GeneralTextProcessing
 
 # Create your views here.
 class TagProcessorView(View):
@@ -96,19 +97,30 @@ class SentenceProcessorView(View):
     context_object_name = 'text_form'
     initial = {'key': 'value'}
     processor_class = TextSentenceProcess()
+    general_processor_class = GeneralTextProcessing()
     form_error = False
+
+    def total_sentiment(self, dict, index_number):
+        return self.general_processor_class.total_text_vibe(dict, index_number)
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {'form': self.form_class})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        total_vibe = []
 
         if form.is_valid():
             text = form.cleaned_data['text']
             results = self.processor_class.text_sentence(text)
 
-            return render(request, 'sentence_processor/result-view.html', {'results': results, 'error': self.form_error})
+            #find total sentimental vibe of the entire text
+            total_vibe.append(self.total_sentiment(results, 2))
+
+            #find total subjectivity vibe of the entire text
+            total_vibe.append(self.total_sentiment(results, 4))
+            
+            return render(request, 'sentence_processor/result-view.html', {'results': results, 'total_vibe': total_vibe, 'error': self.form_error})
 
         else:
             self.form_error = True

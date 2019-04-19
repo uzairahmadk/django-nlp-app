@@ -1,6 +1,6 @@
 from textblob import TextBlob
 from textblob.blob import Sentence
-from collections import defaultdict
+from collections import defaultdict, Counter
 from textprocessor.processingscripts.generalclasses.calculation_scripts import MathemeticsCalculation
 
 class GeneralTextProcessing:
@@ -71,3 +71,13 @@ class GeneralTextProcessing:
             normal_dict[key] = values
 
         return self.math_class.dict_items_summation(normal_dict)
+
+    def total_text_vibe(self, dict, index_number):
+        temp_list = []
+
+        for key, value in dict.items():
+            temp_list.append(value[index_number])
+
+        max_value = temp_list.index(max(temp_list))
+
+        return temp_list[max_value]
