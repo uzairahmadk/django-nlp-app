@@ -140,7 +140,7 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Welcome to FYP Smart Bank',
 
     # Copyright on the footer
-    'copyright': 'Acme Ltd',
+    'copyright': 'Uzair Ltd',
 
     # The model admin to search from the search bar, search bar omitted if excluded
     'search_model': 'auth.User',
