@@ -128,16 +128,16 @@ STATICFILES_DIRS = [
 ]
 JAZZMIN_SETTINGS = {
     # title of the window
-    'site_title': 'Polls Admin',
+    'site_title': 'FYP Smart Bank',
 
     # Title on the login screen
-    'site_header': 'Polls',
+    'site_header': 'Smart Bank',
 
     # square logo to use for your site, must be present in static files, used for favicon and brand on top left
     'site_logo': None,
 
     # Welcome text on the login screen
-    'welcome_sign': 'Welcome to polls',
+    'welcome_sign': 'Welcome to FYP Smart Bank',
 
     # Copyright on the footer
     'copyright': 'Acme Ltd',
