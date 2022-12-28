@@ -4,6 +4,7 @@ from django.urls import path
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
 import csv
+import pandas
 # Register your models here
 from .models import  *
 class ExportCsvMixin:
