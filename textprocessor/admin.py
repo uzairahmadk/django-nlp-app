@@ -4,7 +4,7 @@ from django.urls import path
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
 import csv
-import pandas
+import pandas as pd
 # Register your models here
 from .models import  *
 class ExportCsvMixin:
@@ -44,13 +44,19 @@ class Project(admin.ModelAdmin,ExportCsvMixin):
                 path('import-csv/', self.import_csv),
             ]
             return my_urls + urls
-
         def import_csv(self, request):
             if request.method == "POST":
-                csv_file = request.FILES["csv_file"]
-                reader = csv.reader(csv_file)
-                # Create Hero objects from passed in data
-                # ...
+                csv_file = request.FILES["csv_file"] 
+                reader = pd.read_csv(csv_file)
+                reader = reader.fillna("")
+                for rows in reader.values.tolist:
+                    proj = Project.objects.create(                            
+                        name = rows[0] if rows[0] else None,
+                        department =  rows[1] if rows[1] else None,
+                        supervision =  rows[2] if rows[2] else None,
+                        technology =  rows[3] if rows[3] else None,
+                    )
+                    proj.save()
                 self.message_user(request, "Your csv file has been imported")   
                 return redirect("..")
             form = CsvImportForm()
@@ -60,3 +66,5 @@ class Project(admin.ModelAdmin,ExportCsvMixin):
             )
     except Exception as ex:
         print("New Function Exception: ",ex)
+
+admin.site.register(Announcement)
