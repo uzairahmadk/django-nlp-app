@@ -4,38 +4,17 @@ from django.forms import forms
 from django.urls import path
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
-import csv
 import pandas as pd
 
 # Register your models here
 from .models import  *
-from textprocessor.models import Project as ProjectModel
 
 admin.site.register(Department)
 admin.site.register(Supervision)
 admin.site.register(Technology)
 admin.site.register(Announcement)
-admin.site.register(User)
 class CsvImportForm(forms.Form):
     csv_file = forms.FileField()
-
-class ExportCsvMixin:
-    def export_as_csv(self, request, queryset):
-
-        meta = self.model._meta
-        field_names = [field.name for field in meta.fields]
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
-        writer = csv.writer(response)
-
-        writer.writerow(field_names)
-        for obj in queryset:
-            row = writer.writerow([getattr(obj, field) for field in field_names])
-
-        return response
-
-    export_as_csv.short_description = "Export Selected"
 
 @admin.register(Project)
 class Project(admin.ModelAdmin):

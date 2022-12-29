@@ -1,10 +1,4 @@
-from django.db import models
-from django.contrib.auth.base_user import BaseUserManager
-import datetime
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
-# Create your models here.
+from django.db import models# Create your models here.
 from django.contrib.auth.models import User
 class Topics(models.Model):
     name = models.CharField(max_length=100)    
@@ -81,62 +75,3 @@ class Announcement (models.Model):
      description  = models.TextField(null=True,blank=True,max_length=1000)
      def __str__(self):
         return self.name
-class UserManager(BaseUserManager):
-    def create_user(self, username, password=None):
-        user = self.model(
-            username=username,
-        )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, password):
-        user = self.create_user(
-            username,
-            password=password,
-        )
-
-        user.is_admin = True
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
-       
-class User(AbstractBaseUser):
-    username = models.CharField(
-        unique=True,
-        max_length=50,
-    )
-    bio = models.TextField()
-
-    is_active = models.BooleanField(default=True,
-                                    verbose_name="Active",
-                                    help_text="lorem")
-    is_admin = models.BooleanField(default=False,
-                                   verbose_name="Staff status",
-                                   help_text="lorem")
-    is_superuser = models.BooleanField(default=False,
-                                       verbose_name="Superuser status",
-                                       help_text="lorem")
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'username'
-
-    def get_full_name(self):
-        return self.username
-
-    def get_short_name(self):
-        return self.username
-
-    def __str__(self):
-        return self.username
-
-    def has_perm(self, perm, obj=None):
-        return True
-
-    def has_module_perms(self, db):
-        return True
-    @property
-    def is_staff(self):
-        return self.is_admin
