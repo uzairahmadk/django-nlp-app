@@ -7,7 +7,7 @@ from django.shortcuts import redirect,render
 import pandas as pd
 
 # Register your models here
-from .models import  *
+from .models import  Department,Supervision,Technology,Announcement,Project as ProjectDB
 
 admin.site.register(Department)
 admin.site.register(Supervision)
@@ -16,7 +16,7 @@ admin.site.register(Announcement)
 class CsvImportForm(forms.Form):
     csv_file = forms.FileField()
 
-@admin.register(Project)
+@admin.register(ProjectDB)
 class Project(admin.ModelAdmin):
     list_filter = ('name', 'technology','supervisor','created')
     list_display = ['name', 'technology','supervisor','created']
@@ -36,13 +36,13 @@ class Project(admin.ModelAdmin):
                 reader = pd.read_csv(csv_file)
                 reader = reader.fillna("")
                 for rows in reader.values.tolist():
-                    proj = Project.objects.all(                            
+                    proj = ProjectDB.objects.create(                            
                         name = rows[0] if rows[0] else None,
-                        department =  rows[1] if rows[1] else None,
-                        supervision =  rows[2] if rows[2] else None,
-                        technology =  rows[3] if rows[3] else None,
+                        department =  Department.objects.get_or_create(dept=rows[1])[0],
+                        supervisor =  Supervision.objects.get_or_create(supervisor=rows[2])[0],
+                        technology =  Technology.objects.get_or_create(tech=rows[3])[0],
                     )
-                    proj.save()
+                    # proj.save()
                 self.message_user(request, "Your csv file has been imported")   
                 return redirect("..")
             form = CsvImportForm()
