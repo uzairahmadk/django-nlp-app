@@ -54,7 +54,6 @@ class Project(admin.ModelAdmin):
                             supervisor =  Supervision.objects.get_or_create(supervisor=rows[2])[0],
                             technology =  Technology.objects.get_or_create(tech=rows[3])[0],
                         )
-                        # proj.save()x
                         self.message_user(request, "Your csv file has been imported")   
                 return redirect("..")
             form = CsvImportForm()
