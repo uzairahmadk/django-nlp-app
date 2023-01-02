@@ -21,7 +21,6 @@ class Technology(models.Model):
       return self.tech
   
 class Project (models.Model):  
-    # p_id = models.IntegerField(max_length=25,primary_key=True,null=False) 
     name = models.CharField(max_length=255,unique=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL ,null=True) #CAscade is waja se for eg agar Room del hogya to ye b hojaye
     supervisor = models.ForeignKey(Supervision,on_delete=models.SET_NULL,null=True)
@@ -36,7 +35,6 @@ class Announcement (models.Model):
      name = models.CharField(max_length=255) 
      hosts =  models.ForeignKey(User, on_delete=models.SET_NULL ,null=True)
      supervisor = models.ForeignKey(Supervision,on_delete=models.SET_NULL,null=True)
-    #  topics = models.ForeignKey(Topics, on_delete=models.SET_NULL ,null=True) #CAscade is waja se for eg agar Room del hogya to ye b hojaye
      technology = models.ForeignKey(Technology, on_delete=models.SET_NULL ,null=True)
      created = models.DateField(auto_now=False)
      description  = models.TextField(null=True,blank=True,max_length=1000)

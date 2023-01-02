@@ -1,8 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from django.forms import forms
 from django.urls import path
-from django.http import HttpResponse
 from django.shortcuts import redirect,render
 import pandas as pd
 
@@ -35,15 +33,29 @@ class Project(admin.ModelAdmin):
                 csv_file = request.FILES["csv_file"] 
                 reader = pd.read_csv(csv_file)
                 reader = reader.fillna("")
+                
                 for rows in reader.values.tolist():
-                    proj = ProjectDB.objects.create(                            
-                        name = rows[0] if rows[0] else None,
-                        department =  Department.objects.get_or_create(dept=rows[1])[0],
-                        supervisor =  Supervision.objects.get_or_create(supervisor=rows[2])[0],
-                        technology =  Technology.objects.get_or_create(tech=rows[3])[0],
-                    )
-                    # proj.save()
-                self.message_user(request, "Your csv file has been imported")   
+                    try:
+                        d1= ProjectDB.objects.filter(
+                                name = rows[0],
+                                department =  Department.objects.get(dept=rows[1]),
+                                supervisor =  Supervision.objects.get(supervisor=rows[2]),
+                                technology =  Technology.objects.get(tech=rows[3])
+                                                    ).exists()
+                    except:
+                        d1= None
+
+                    if d1:
+                        self.message_user(request,"Data Already Exists")
+                    else:
+                        ProjectDB.objects.create(                            
+                            name = rows[0] if rows[0] else None,
+                            department =  Department.objects.get_or_create(dept=rows[1])[0],
+                            supervisor =  Supervision.objects.get_or_create(supervisor=rows[2])[0],
+                            technology =  Technology.objects.get_or_create(tech=rows[3])[0],
+                        )
+                        # proj.save()x
+                        self.message_user(request, "Your csv file has been imported")   
                 return redirect("..")
             form = CsvImportForm()
             payload = {"form": form}
